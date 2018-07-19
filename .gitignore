@@ -17,3 +17,13 @@ wp-content/plugins/hello.php
 /sitemap.xml
 /sitemap.xml.gz
 
+vendor
+bin
+cover
+composer.lock
+tmp
+build
+.idea
+*~
+*.zip
+.DS_Store
