@@ -9,6 +9,7 @@ namespace Niteoweb\WooSimpleDashboard;
  * Runtime:     5.3+
  * Author:      WooCart
  * Text Domain: woo-simple-dashboard
+ * Domain Path: /langs/
  * Author URI:  www.woocart.com
  */
 
