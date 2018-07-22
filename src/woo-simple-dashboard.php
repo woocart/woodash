@@ -12,10 +12,6 @@ namespace Niteoweb\WooSimpleDashboard;
  * Author URI:  www.woocart.com
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 /**
  * Checks for PHP version and stop the plugin if the version is < 5.3.0.
  */
@@ -29,7 +25,7 @@ if ( version_compare( PHP_VERSION, '5.3.0', '<' ) ) {
 			server software. Your PHP version is', 'woo-simple-dashboard'
 		);
 		?>
-		<b><?php echo sanitize_text_field( PHP_VERSION ); ?></b></p>
+		<b><?php echo esc_html( PHP_VERSION ); ?></b></p>
 	</div>
 	<?php
 	die();
@@ -44,74 +40,74 @@ if ( version_compare( PHP_VERSION, '5.3.0', '<' ) ) {
  */
 class WooSimpleDashboard {
 
-	const OPTIONNAME 	= 'Niteoweb.WooDashboard.View';
-	const SLUGPREFIX 	= 'woodashboard_';
+	const OPTIONNAME    = 'Niteoweb.WooDashboard.View';
+	const SLUGPREFIX    = 'woodashboard_';
 	const DEFAULTSTATUS = 'woocart';
 
-	private $admin_url 			= '';
-	private $status 			= '';
-	private $hide_menu_items 	= array(
-    	'index.php' => array(
-    		'sub' => 'update-core.php'
-    	),
-    	'comments' 	=> array(
-    		'main' => 'edit-comments.php'
-    	),
-    	'themes' 	=> array(
-    		'main' => 'themes.php'
-    	),
-    	'plugins' 	=> array(
-    		'main' => 'plugins.php'
-    	),
-    	'tools' 	=> array(
-    		'main' => 'tools.php'
-    	),
-    	'options' 	=> array(
-    		'main' => 'options-general.php'
-    	),
-    	'customers' => array(
-    		'main' => 'edit.php?post_type=customer'
-    	),
-    	'woocommerce' => array(
-    		'main' => 'woocommerce'
-    	),
-    	'wpcf' 		=> array(
-    		'main' => 'wpcf7'
-    	)
-    );
+	private $admin_url       = '';
+	private $status          = '';
+	private $hide_menu_items = array(
+		'index.php'   => array(
+			'sub' => 'update-core.php',
+		),
+		'comments'    => array(
+			'main' => 'edit-comments.php',
+		),
+		'themes'      => array(
+			'main' => 'themes.php',
+		),
+		'plugins'     => array(
+			'main' => 'plugins.php',
+		),
+		'tools'       => array(
+			'main' => 'tools.php',
+		),
+		'options'     => array(
+			'main' => 'options-general.php',
+		),
+		'customers'   => array(
+			'main' => 'edit.php?post_type=customer',
+		),
+		'woocommerce' => array(
+			'main' => 'woocommerce',
+		),
+		'wpcf'        => array(
+			'main' => 'wpcf7',
+		),
+	);
 
-    private $add_menu_items = array(
-    	'orders' 	=> array(
-    		'name' 		=> 'Orders',
-    		'link' 		=> 'edit.php?post_type=shop_order',
-    		'priority' 	=> 101,
-    		'icon' 		=> 'dashicons-heart'
-    	),
-    	'stock' 	=> array(
-    		'name' 		=> 'Stock',
-    		'link' 		=> 'admin.php?page=wc-reports&tab=stock',
-    		'priority' 	=> 102,
-    		'icon' 		=> 'dashicons-archive'
-    	),
-    	'customers' => array(
-    		'name' 		=> 'Customers',
-    		'link' 		=> 'admin.php?page=wc-reports&tab=customers&report=customer_list',
-    		'priority' 	=> 103,
-    		'icon' 		=> 'dashicons-groups'
-    	),
-    	'taxes' 	=> array(
-    		'name' 		=> 'Taxes',
-    		'link' 		=> 'admin.php?page=wc-reports&tab=taxes',
-    		'priority' 	=> 104,
-    		'icon' 		=> 'dashicons-feedback'
-    	),
-    	'reports' 	=> array(
-    		'name' 		=> 'All Reports',
-    		'link' 		=> 'admin.php?page=wc-reports',
-    		'priority' 	=> 105,
-    		'icon' 		=> 'dashicons-chart-area'
-    	)
-    );
+	private $add_menu_items = array(
+		'orders'    => array(
+			'name'     => 'Orders',
+			'link'     => 'edit.php?post_type=shop_order',
+			'priority' => 101,
+			'icon'     => 'dashicons-heart',
+		),
+		'stock'     => array(
+			'name'     => 'Stock',
+			'link'     => 'admin.php?page=wc-reports&tab=stock',
+			'priority' => 102,
+			'icon'     => 'dashicons-archive',
+		),
+		'customers' => array(
+			'name'     => 'Customers',
+			'link'     => 'admin.php?page=wc-reports&tab=customers&report=customer_list',
+			'priority' => 103,
+			'icon'     => 'dashicons-groups',
+		),
+		'taxes'     => array(
+			'name'     => 'Taxes',
+			'link'     => 'admin.php?page=wc-reports&tab=taxes',
+			'priority' => 104,
+			'icon'     => 'dashicons-feedback',
+		),
+		'reports'   => array(
+			'name'     => 'All Reports',
+			'link'     => 'admin.php?page=wc-reports',
+			'priority' => 105,
+			'icon'     => 'dashicons-chart-area',
+		),
+	);
 
 	/**
 	 * Class Constructor.
@@ -251,7 +247,7 @@ class WooSimpleDashboard {
 			foreach ( $this->add_menu_items as $menu_key => $menu_value ) {
 				add_menu_page( sanitize_text_field( $menu_value['name'] ), sanitize_text_field( $menu_value['name'] ), 'manage_options', self::SLUGPREFIX . $menu_key, '', sanitize_text_field( $menu_value['icon'] ), absint( $menu_value['priority'] ) );
 
-				$menu[$menu_value['priority']][2] = $this->admin_url . $menu_value['link'];
+				$menu[ $menu_value['priority'] ][2] = $this->admin_url . $menu_value['link'];
 			}
 
 			/**
@@ -304,7 +300,7 @@ class WooSimpleDashboard {
 				'edit.php?post_type=page',
 				'upload.php',
 				'users.php',
-				$this->admin_url . 'index.php?woo_dashboard=' . $switch
+				$this->admin_url . 'index.php?woo_dashboard=' . $switch,
 			);
 		}
 	}
@@ -334,32 +330,36 @@ class WooSimpleDashboard {
 	 * specific order if the `Simple Store Dashboard` view is ON.
 	 */
 	public function dashboard_meta_order() {
-		global $pagenow;
-
-		$id 			= get_current_user_id();
+		$id             = get_current_user_id();
 		$new_meta_value = array(
 			'normal'  => 'woocommerce_dashboard_status,woocommerce_dashboard_recent_reviews',
 			'side'    => 'dashboard_right_now,dashboard_activity,dashboard_quick_press',
 			'column3' => '',
-			'column4' => ''
+			'column4' => '',
 		);
 
 		// Update usermeta.
 		$user_meta = get_user_meta( $id, 'meta-box-order_dashboard', true );
 
-		if ( $user_meta !== maybe_serialize( $new_meta_value ) ) {
-			if ( ! empty( $user_meta ) ) {
+		if ( ! empty( $user_meta ) ) {
+			if ( $user_meta !== maybe_serialize( $new_meta_value ) ) {
 				// Backing up current meta value.
 				update_user_meta( $id, 'meta-box-order_dashboard_old', $user_meta );
 				// Adding the new meta value.
 				update_user_meta( $id, 'meta-box-order_dashboard', $new_meta_value );
 			} else {
 				/**
-				 * Usermeta does not exist.
-				 * So, simply adding the new value.
+				 * Usermeta matches backup value.
+				 * So, no need to backup again.
 				 */
 				update_user_meta( $id, 'meta-box-order_dashboard', $new_meta_value );
 			}
+		} else {
+			/**
+			 * Usermeta does not exist.
+			 * So, simply adding the new value.
+			 */
+			update_user_meta( $id, 'meta-box-order_dashboard', $new_meta_value );
 		}
 	}
 
@@ -368,8 +368,6 @@ class WooSimpleDashboard {
 	 * Let's get back to the original dashboard :)
 	 */
 	public function reverse_dashboard_meta_order() {
-		global $pagenow;
-
 		$id = get_current_user_id();
 
 		// Check if the old usermeta exists.
@@ -393,7 +391,7 @@ class WooSimpleDashboard {
 }
 
 // Initialize Plugin.
-if ( is_admin() ) {
+if ( defined( 'ABSPATH' ) ) {
 	$niteo_woo_dashboard = new WooSimpleDashboard();
 
 	// Activation Hook.
