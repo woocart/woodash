@@ -259,6 +259,14 @@ class WooSimpleDashboard {
 		}
 
 		/**
+		 * We are adding two additional menu separators over here.
+		 * Adding 4 separators between values 5 and 10 (6,7,8,9)
+		 */
+		for ( $i = 6; $i < 10; $i++ ) {
+			$this->admin_menu_separator( $i );
+		}
+
+		/**
 		 * Add switcher.
 		 * With priority `9999`.
 		 */
@@ -290,17 +298,21 @@ class WooSimpleDashboard {
 
 			return array(
 				'index.php',
-				'separator1',
+				'separator6',
 				$this->admin_url . 'edit.php?post_type=shop_order',
 				$this->admin_url . 'admin.php?page=wc-reports&tab=stock',
 				$this->admin_url . 'admin.php?page=wc-reports&tab=customers&report=customer_list',
 				'edit.php?post_type=product',
+				'separator7',
 				$this->admin_url . 'admin.php?page=wc-reports&tab=taxes',
 				$this->admin_url . 'admin.php?page=wc-reports',
+				'separator8',
 				'edit.php',
 				'edit.php?post_type=page',
 				'upload.php',
+				'separator9',
 				'users.php',
+				'separator-last',
 				$this->admin_url . 'index.php?woo_dashboard=' . $switch,
 			);
 		}
@@ -387,6 +399,21 @@ class WooSimpleDashboard {
 	public function remove_meta_backup() {
 		$id = get_current_user_id();
 		delete_user_meta( $id, 'meta-box-order_dashboard_old' );
+	}
+
+	/**
+	 * Adds separator to the admin menu.
+	 */
+	public function admin_menu_separator( $position ) {
+		global $menu;
+
+		$menu[ $position ] = array(
+			0	=>	'',
+			1	=>	'read',
+			2	=>	'separator' . $position,
+			3	=>	'',
+			4	=>	'wp-menu-separator'
+		);
 	}
 
 }
