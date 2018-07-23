@@ -1,14 +1,14 @@
 === Woo Simple Dashboard ===
-Contributors: niteoweb
+Contributors: Niteo, WooCart
 Tags: woocart, woocommerce, woo dashboard
 Requires at least: 4.0
 Tested up to: 4.9.7
 Stable tag: 1.0.0
 
-**Woo Simple Dashboard** is a simple plugin for WordPress which makes it super easy to switch between two versions of the admin dashboard.
+**Woo Simple Dashboard** is a plugin for WooCommerce stores that creates a store-focused dashboard and menu to make it easier to access the common store features.
 
 == Description ==
-**Woo Simple Dashboard** is a simple plugin for WordPress which makes it super easy to switch between two versions of the admin dashboard - Normal version which is the default WordPress admin dashboard and Store version which is centered towards WooCommerce.
+**Woo Simple Dashboard** is a plugin for WooCommerce stores that creates a store-focused dashboard and menu to make it easier to access the common store features. It includes a menu link to switch between the regular WordPress dashboard and the Woo Simple Dashboard.
 
 == Installation ==
 
