@@ -116,28 +116,14 @@ class WooSimpleDashboard {
 	public function __construct() {
 		if ( is_admin() ) {
 			// Set admin URL.
-			$this->set_admin_url();
+			$this->admin_url = get_admin_url();
 
 			// Set status.
-			$this->set_status();
+			$this->status = get_option( self::OPTIONNAME, self::DEFAULTSTATUS );
 
-			// Initiate Dashboard.
-			$this->woo_dashboard();
+			// Check permissions.
+			add_action( 'plugins_loaded', array( &$this, 'check_permissions' ), 10 );
 		}
-	}
-
-	/**
-	 * Set the admin URL.
-	 */
-	private function set_admin_url() {
-		$this->admin_url = get_admin_url();
-	}
-
-	/**
-	 * Set plugin status.
-	 */
-	private function set_status() {
-		$this->status = get_option( self::OPTIONNAME, self::DEFAULTSTATUS );
 	}
 
 	/**
@@ -163,6 +149,16 @@ class WooSimpleDashboard {
 
 		// Also, remove the usermeta backup.
 		$this->remove_meta_backup();
+	}
+
+	/**
+	 * Check for user permissions and then proceed accordingly.
+	 */
+	public function check_permissions() {
+		if ( current_user_can( 'administrator' ) ) {
+			// Initiate Dashboard.
+			$this->woo_dashboard();
+		}
 	}
 
 	/**
