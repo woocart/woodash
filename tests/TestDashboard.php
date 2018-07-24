@@ -17,18 +17,11 @@ class TestDashboard extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * Three functions are tested in the __construct() function.
+	 * Two functions are tested in the __construct() function.
 	 * 1. set_admin_url()
 	 * 2. set_status()
-	 * 3. woo_dashboard()
 	 */
 	public function test_init_admin() {
-		\WP_Mock::wpFunction(
-			'wp_next_scheduled', array(
-				'return' => true
-			)
-		);
-
 		\WP_Mock::wpFunction(
 			'is_admin', array(
 				'return' => true
@@ -50,6 +43,24 @@ class TestDashboard extends \PHPUnit\Framework\TestCase {
 
 		$plugin = new WooSimpleDashboard();
 
+		\WP_Mock::expectActionAdded( 'plugins_loaded', array( $plugin, 'check_permissions' ), 10 );
+
+		$plugin->__construct();
+		\WP_Mock::assertHooksAdded();
+	}
+
+	/**
+	 * Testing the permissions check.
+	 */
+	public function test_check_permissions() {
+		\WP_Mock::wpFunction(
+			'current_user_can', array(
+				'return' => true
+			)
+		);
+
+		$plugin = new WooSimpleDashboard();
+
 		\WP_Mock::expectActionAdded( 'admin_menu', array( $plugin, 'change_admin_menu' ), PHP_INT_MAX );
 		\WP_Mock::expectActionAdded( 'wp_dashboard_setup', array( $plugin, 'dashboard_widgets' ), PHP_INT_MAX );
 		\WP_Mock::expectActionAdded( 'init', array( $plugin, 'switch_dashboards' ), 10 );
@@ -57,7 +68,7 @@ class TestDashboard extends \PHPUnit\Framework\TestCase {
 		\WP_Mock::expectFilterAdded( 'custom_menu_order', array( $plugin, 'rearrange_admin_menu' ), PHP_INT_MAX, 1 );
 		\WP_Mock::expectFilterAdded( 'menu_order', array( $plugin, 'rearrange_admin_menu' ), PHP_INT_MAX, 1 );
 
-		$plugin->__construct();
+		$plugin->check_permissions();
 		\WP_Mock::assertHooksAdded();
 	}
 
@@ -66,12 +77,6 @@ class TestDashboard extends \PHPUnit\Framework\TestCase {
 	 * Testing with mismatch values.
 	 */
 	public function test_activate_plugin() {
-		\WP_Mock::wpFunction(
-			'wp_next_scheduled', array(
-				'return' => true
-			)
-		);
-
 		\WP_Mock::wpFunction(
 			'update_option', array(
 				'called' => 1,
@@ -126,12 +131,6 @@ class TestDashboard extends \PHPUnit\Framework\TestCase {
 	 */
 	public function test_deactivate_plugin() {
 		\WP_Mock::wpFunction(
-			'wp_next_scheduled', array(
-				'return' => true
-			)
-		);
-
-		\WP_Mock::wpFunction(
 			'delete_option', array(
 				'called' => 1,
 				'args' 	 => array( 'Niteoweb.WooDashboard.View' )
@@ -175,12 +174,6 @@ class TestDashboard extends \PHPUnit\Framework\TestCase {
 	 */
 	public function test_dashboard_meta_order_empty_values() {
 		\WP_Mock::wpFunction(
-			'wp_next_scheduled', array(
-				'return' => true
-			)
-		);
-
-		\WP_Mock::wpFunction(
 			'get_current_user_id', array(
 				'return' => true
 			)
@@ -215,12 +208,6 @@ class TestDashboard extends \PHPUnit\Framework\TestCase {
 	 * Testing removal of meta backup.
 	 */
 	public function test_remove_meta_backup() {
-		\WP_Mock::wpFunction(
-			'wp_next_scheduled', array(
-				'return' => true
-			)
-		);
-
 		\WP_Mock::wpFunction(
 			'get_current_user_id', array(
 				'return' => true
