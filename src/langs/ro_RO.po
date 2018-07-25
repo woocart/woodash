@@ -29,9 +29,9 @@ msgid ""
 "provider about upgrading your\n"
 "\t\t\tserver software. Your PHP version is"
 msgstr ""
-"Acest plugin necesită PHP 5.3.0 sau mai mare. Vă rugăm să contactaţi "
-"furnizorul de gazduire despre upgrade-ul de software-ul de server. Este "
-"versiunea PHP"
+"Acest plugin necesită PHP 5.3.0 sau o versiune superioară. Te rugăm să contactezi "
+"furnizorul de gazduire web referitor la un upgrade de software pentru server."
+"Versiunea ta PHP este"
 
 #: woo-simple-dashboard.php:224
 #, fuzzy
@@ -39,8 +39,8 @@ msgid ""
 "Woo Simple Dashboard plugin has been activated and provides an easy switcher "
 "for two different Dashboards."
 msgstr ""
-"Woo tabloul de bord simplu plugin-ul a fost activat şi oferă o uşor nuia a "
-"întrerupe pentru două tablouri de bord diferite."
+"Plugin-ul Woo Simple Dashboard a fost activat şi oferă o comutare simplă "
+"între două dashboard-uri diferite."
 
 #: woo-simple-dashboard.php:258
 msgid "My Store"
@@ -49,7 +49,7 @@ msgstr "Magazinul meu"
 #: woo-simple-dashboard.php:265
 #, fuzzy
 msgid "Switch Dashboard"
-msgstr "Tabloul de bord trece"
+msgstr "Schimbă dashboard-ul"
 
 #: woo-simple-dashboard.php:322
 msgid "At a Glance"
@@ -69,8 +69,8 @@ msgid ""
 "Simple Store Dashboard switcher for WordPress providing quick access to "
 "WooCommerce Store Dashboard."
 msgstr ""
-"Comutare simplă a tabloului de bord pentru WordPress, oferind acces rapid la "
-"Tabloul de bord pentru magazinul WooCommerce."
+"Un mod simplu de a schimba dashboard-ul WordPress, oferind acces rapid la "
+"dashboard-ul pentru magazinul WooCommerce."
 
 #. Author of the plugin/theme
 msgid "WooCart"
