@@ -412,6 +412,18 @@ class WooSimpleDashboard {
 		);
 	}
 
+	/**
+	 * Function to debug the admin menu.
+	 */
+	public function debug_admin_menus() {
+		global $submenu, $menu, $pagenow;
+
+		if ( 'index.php' === $pagenow ) {
+			echo '<pre>'; print_r( $menu ); echo '</pre>';
+			echo '<pre>'; print_r( $submenu ); echo '</pre>';
+		}
+	}
+
 }
 
 // Initialize Plugin.
