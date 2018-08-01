@@ -47,35 +47,25 @@ class WooSimpleDashboard {
 
 	private $admin_url       = '';
 	private $status          = '';
-	private $hide_menu_items = array(
-		'index.php'   => array(
-			'sub' => 'update-core.php',
-		),
-		'comments'    => array(
-			'main' => 'edit-comments.php',
-		),
-		'themes'      => array(
-			'main' => 'themes.php',
-		),
-		'plugins'     => array(
-			'main' => 'plugins.php',
-		),
-		'tools'       => array(
-			'main' => 'tools.php',
-		),
-		'options'     => array(
-			'main' => 'options-general.php',
-		),
-		'customers'   => array(
-			'main' => 'edit.php?post_type=customer',
-		),
-		'woocommerce' => array(
-			'main' => 'woocommerce',
-		),
-		'wpcf'        => array(
-			'main' => 'wpcf7',
-		),
-	);
+	private $menus_to_stay 	 = array(
+        // Dashboard
+        'index.php',
+
+        // Posts
+        'edit.php',
+
+        // Pages
+        'edit.php?post_type=page',
+
+        // Media
+        'upload.php',
+
+        // Products
+        'edit.php?post_type=product',
+
+        // Users
+        'users.php'
+    );
 
 	private $add_menu_items = array(
 		'orders'    => array(
@@ -230,13 +220,8 @@ class WooSimpleDashboard {
 
 		if ( 'woocart' === $this->status ) {
 			// Hide menu items.
-			foreach ( $this->hide_menu_items as $menu_key => $menu_value ) {
-				foreach ( $menu_value as $remove_key => $remove_value ) {
-					if ( 'sub' === $remove_key ) {
-						remove_submenu_page( $menu_key, $remove_value );
-					} else {
-						remove_menu_page( $remove_value );
-					}
+			foreach ( $GLOBALS['menu'] as $key => $value ) {
+				if ( ! in_array( $value[2], $this->menus_to_stay ) ) { remove_menu_page( $value[2] );
 				}
 			}
 
@@ -258,7 +243,7 @@ class WooSimpleDashboard {
 		 * We are adding two additional menu separators over here.
 		 * Adding 4 separators between values 5 and 10 (6,7,8,9)
 		 */
-		for ( $i = 6; $i < 10; $i++ ) {
+		for ( $i = 35; $i < 40; $i++ ) {
 			$this->admin_menu_separator( $i );
 		}
 
@@ -294,21 +279,21 @@ class WooSimpleDashboard {
 
 			return array(
 				'index.php',
-				'separator6',
+				'separator35',
 				$this->admin_url . 'edit.php?post_type=shop_order',
 				$this->admin_url . 'admin.php?page=wc-reports&tab=stock',
 				$this->admin_url . 'admin.php?page=wc-reports&tab=customers&report=customer_list',
 				'edit.php?post_type=product',
-				'separator7',
+				'separator36',
 				$this->admin_url . 'admin.php?page=wc-reports&tab=taxes',
 				$this->admin_url . 'admin.php?page=wc-reports',
-				'separator8',
+				'separator37',
 				'edit.php',
 				'edit.php?post_type=page',
 				'upload.php',
-				'separator9',
+				'separator38',
 				'users.php',
-				'separator-last',
+				'separator39',
 				$this->admin_url . 'index.php?woo_dashboard=' . $switch,
 			);
 		}
