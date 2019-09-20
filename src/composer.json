@@ -1,0 +1,18 @@
+{
+  "name": "WooDash",
+  "description": "",
+  "keywords": [
+    "WordPress",
+    "plugin",
+    "WooDash"
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Niteo\\WooCart\\WooDash\\": "classes"
+    }
+  }
+}
