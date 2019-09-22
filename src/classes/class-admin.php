@@ -13,8 +13,8 @@ namespace Niteo\WooCart\WooDash {
 	 */
 	class Admin {
 
-		public $admin_url;
-		public $status;
+		protected $admin_url;
+		protected $status;
 
 
 		/**
