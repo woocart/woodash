@@ -10,10 +10,10 @@ namespace Niteo\WooCart\WooDash {
 	 */
 	class Config {
 
-    const DB_OPTION    		= 'woodash_options';
-		const PREFIX    			= 'woodash_';
-		const DEFAULT_STATUS 	= 'woodash';
+		const DB_OPTION      = 'woodash_options';
+		const PREFIX         = 'woodash_';
+		const DEFAULT_STATUS = 'woodash';
 
-  }
+	}
 
 }

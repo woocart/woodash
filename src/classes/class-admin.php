@@ -23,10 +23,10 @@ namespace Niteo\WooCart\WooDash {
 		public function __construct() {
 			if ( is_admin() ) {
 				// set admin url
-				$this->admin_url 	= esc_url( get_admin_url() );
+				$this->admin_url = esc_url( get_admin_url() );
 
 				// set status
-				$this->status 		= sanitize_text_field( get_option( Config::DB_OPTION, Config::DEFAULT_STATUS ) );
+				$this->status = sanitize_text_field( get_option( Config::DB_OPTION, Config::DEFAULT_STATUS ) );
 
 				// check permissions
 				add_action( 'plugins_loaded', [ &$this, 'check_permissions' ], 10 );
@@ -35,7 +35,7 @@ namespace Niteo\WooCart\WooDash {
 		}
 
 
-    /**
+		/**
 		 * Check for user permissions and then proceed accordingly.
 		 */
 		public function check_permissions() {
@@ -210,7 +210,7 @@ namespace Niteo\WooCart\WooDash {
 					'separator38',
 					'users.php',
 					'separator39',
-					$this->admin_url . 'index.php?woo_dashboard=' . $switch
+					$this->admin_url . 'index.php?woo_dashboard=' . $switch,
 				];
 			}
 		}
@@ -247,7 +247,7 @@ namespace Niteo\WooCart\WooDash {
 				'normal'  => 'woocommerce_dashboard_status,woocommerce_dashboard_recent_reviews',
 				'side'    => 'dashboard_right_now,dashboard_activity,dashboard_quick_press',
 				'column3' => '',
-				'column4' => ''
+				'column4' => '',
 			];
 
 			// Update usermeta.
@@ -310,11 +310,11 @@ namespace Niteo\WooCart\WooDash {
 			global $menu;
 
 			$menu[ $position ] = [
-				0	=>	'',
-				1	=>	'read',
-				2	=>	'separator' . $position,
-				3	=>	'',
-				4	=>	'wp-menu-separator'
+				0 => '',
+				1 => 'read',
+				2 => 'separator' . $position,
+				3 => '',
+				4 => 'wp-menu-separator',
 			];
 		}
 
@@ -326,11 +326,15 @@ namespace Niteo\WooCart\WooDash {
 			global $submenu, $menu, $pagenow;
 
 			if ( 'index.php' === $pagenow ) {
-				echo '<pre>'; print_r( $menu); echo '</pre>';
-				echo '<pre>'; print_r( $submenu ); echo '</pre>';
+				echo '<pre>';
+				print_r( $menu );
+				echo '</pre>';
+				echo '<pre>';
+				print_r( $submenu );
+				echo '</pre>';
 			}
 		}
 
-  }
+	}
 
 }
