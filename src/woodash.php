@@ -19,7 +19,6 @@ namespace Niteo\WooCart\WooDash {
 	// composer autoloader
 	require_once __DIR__ . '/vendor/autoload.php';
 
-	use Niteo\WooCart\WooDash\Menu;
 	use Niteo\WooCart\WooDash\Config;
 	use Niteo\WooCart\WooDash\Admin;
 	use Niteo\WooCart\WooDash\Dashboard;
@@ -33,7 +32,6 @@ namespace Niteo\WooCart\WooDash {
 	 */
 	class WooDash {
 
-		protected $menu;
 		protected $admin;
 		protected $dashboard;
 
@@ -44,8 +42,7 @@ namespace Niteo\WooCart\WooDash {
 		public function __construct() {
 
 			// initialize classes
-			$this->menu 	= new Menu();
-			$this->admin 	= new Admin();
+			$this->admin = new Admin();
 
 		}
 
@@ -78,8 +75,10 @@ namespace Niteo\WooCart\WooDash {
 
 	}
 
+
 	// initialize plugin
 	$woodash = new WooDash();
+
 
 	/**
 	 * Hooks for plugin activation & deactivation

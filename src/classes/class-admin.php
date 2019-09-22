@@ -2,7 +2,8 @@
 
 namespace Niteo\WooCart\WooDash {
 
-  use Niteo\WooCart\WooDash\Config;
+	use Niteo\WooCart\WooDash\Config;
+	use Niteo\WooCart\WooDash\Menu;
 
 	/**
 	 * Admin functionality of the plugin.
@@ -12,8 +13,8 @@ namespace Niteo\WooCart\WooDash {
 	 */
 	class Admin {
 
-		protected $admin_url;
-		protected $status;
+		public $admin_url;
+		public $status;
 
 
 		/**
@@ -29,6 +30,7 @@ namespace Niteo\WooCart\WooDash {
 
 				// check permissions
 				add_action( 'plugins_loaded', [ &$this, 'check_permissions' ], 10 );
+				// add_action( 'admin_init', [ &$this, 'debug_admin_menus' ], 10 );
 			}
 		}
 
@@ -75,13 +77,13 @@ namespace Niteo\WooCart\WooDash {
 
 				if ( ! empty( $switch ) ) {
 					if ( $switch !== $this->status ) {
-						if ( 'woocart' === $switch ) {
-							update_option( Config::OPTIONNAME, 'woocart' );
+						if ( Config::DEFAULT_STATUS === $switch ) {
+							update_option( Config::DB_OPTION, Config::DEFAULT_STATUS );
 
 							// update usermeta
 							$this->dashboard_meta_order();
 						} else {
-							update_option( Config::OPTIONNAME, 'normal' );
+							update_option( Config::DB_OPTION, 'regular' );
 
 							// reverse usermeta
 							$this->reverse_dashboard_meta_order();
@@ -114,16 +116,16 @@ namespace Niteo\WooCart\WooDash {
 		public function change_admin_menu() {
 			global $menu;
 
-			if ( 'woocart' === $this->status ) {
+			if ( Config::DEFAULT_STATUS === $this->status ) {
 				// hide menu items
 				foreach ( $GLOBALS['menu'] as $key => $value ) {
-					if ( ! in_array( $value[2], $this->menus_to_stay ) ) {
+					if ( ! in_array( $value[2], Menu::$default_menus ) ) {
 						remove_menu_page( $value[2] );
 					}
 				}
 
 				// Add menu items.
-				foreach ( $this->add_menu_items as $menu_key => $menu_value ) {
+				foreach ( Menu::$add_items as $menu_key => $menu_value ) {
 					add_menu_page(
 						sanitize_text_field( $menu_value['name'] ),
 						sanitize_text_field( $menu_value['name'] ),
@@ -166,10 +168,10 @@ namespace Niteo\WooCart\WooDash {
 				9999
 			);
 
-			if ( 'woocart' === $this->status ) {
-				$menu[9999][2] = $this->admin_url . 'index.php?dashboard=regular';
+			if ( Config::DEFAULT_STATUS === $this->status ) {
+				$menu[9999][2] = $this->admin_url . 'index.php?woo_dashboard=regular';
 			} else {
-				$menu[9999][2] = $this->admin_url . 'index.php?dashboard=woodash';
+				$menu[9999][2] = $this->admin_url . 'index.php?woo_dashboard=' . Config::DEFAULT_STATUS;
 			}
 		}
 
@@ -180,15 +182,15 @@ namespace Niteo\WooCart\WooDash {
 		 * @param array $menu_order Array with list of menu items.
 		 */
 		public function rearrange_admin_menu( $menu_order ) {
-			if ( 'woocart' === $this->status ) {
+			if ( Config::DEFAULT_STATUS === $this->status ) {
 				if ( ! $menu_order ) {
 					return true;
 				}
 
-				$switch = 'woocart';
+				$switch = Config::DEFAULT_STATUS;
 
-				if ( 'woocart' === $this->status ) {
-					$switch = 'normal';
+				if ( Config::DEFAULT_STATUS === $this->status ) {
+					$switch = 'regular';
 				}
 
 				return [
@@ -218,7 +220,7 @@ namespace Niteo\WooCart\WooDash {
 		 * Re-arrange dashboard widgets.
 		 */
 		public function dashboard_widgets() {
-			if ( 'woocart' === $this->status ) {
+			if ( Config::DEFAULT_STATUS === $this->status ) {
 				global $wp_meta_boxes, $pagenow;
 
 				if ( 'index.php' === $pagenow ) {
@@ -324,8 +326,8 @@ namespace Niteo\WooCart\WooDash {
 			global $submenu, $menu, $pagenow;
 
 			if ( 'index.php' === $pagenow ) {
-				sprintf( '<pre>%s</pre>', $menu );
-				sprintf( '<pre>%s</pre>', $submenu );
+				echo '<pre>'; print_r( $menu); echo '</pre>';
+				echo '<pre>'; print_r( $submenu ); echo '</pre>';
 			}
 		}
 
