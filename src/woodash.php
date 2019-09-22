@@ -16,6 +16,9 @@ namespace Niteo\WooCart\WooDash {
 	// exit if called directly
 	defined( 'ABSPATH' ) || exit;
 
+	// composer autoloader
+	require_once __DIR__ . '/vendor/autoload.php';
+
 	use Niteo\WooCart\WooDash\Menu;
 	use Niteo\WooCart\WooDash\Config;
 	use Niteo\WooCart\WooDash\Admin;
