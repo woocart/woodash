@@ -10,8 +10,8 @@ namespace Niteo\WooCart\WooDash {
 	 */
 	class Menu {
 
-    public $add_items;
-		public $default_menus = [
+    public static $add_items;
+		public static $default_menus = [
 			// dashboard
 			'index.php',
 
@@ -37,7 +37,7 @@ namespace Niteo\WooCart\WooDash {
 		 */
 		public function __construct() {
 			// add items to be added to admin menu
-			$this->add_items = [
+			self::$add_items = [
 				'orders'    => [
 					'name'     => esc_html__( 'Orders', 'woodash' ),
 					'link'     => 'edit.php?post_type=shop_order',
@@ -71,6 +71,8 @@ namespace Niteo\WooCart\WooDash {
 			];
 		}
 
-  }
+	}
+
+	new Menu();
 
 }
