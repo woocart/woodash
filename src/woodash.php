@@ -3,7 +3,7 @@
 /**
  * Plugin Name: WooDash
  * Description: WooDash creates a store-focused sidebar menu and home dashboard to make it easier to access the common WooCommerce features.
- * Version:     1.0.0
+ * Version:     @##VERSION##@
  * Runtime:     5.6+
  * Author:      WooCart
  * Text Domain: woodash
