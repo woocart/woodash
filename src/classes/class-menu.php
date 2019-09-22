@@ -10,7 +10,7 @@ namespace Niteo\WooCart\WooDash {
 	 */
 	class Menu {
 
-    public static $add_items;
+		public static $add_items;
 		public static $default_menus = [
 			// dashboard
 			'index.php',
@@ -28,7 +28,7 @@ namespace Niteo\WooCart\WooDash {
 			'edit.php?post_type=product',
 
 			// users
-			'users.php'
+			'users.php',
 		];
 
 
@@ -67,7 +67,7 @@ namespace Niteo\WooCart\WooDash {
 					'link'     => 'admin.php?page=wc-reports',
 					'priority' => 105,
 					'icon'     => 'dashicons-chart-area',
-				]
+				],
 			];
 		}
 
