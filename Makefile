@@ -15,7 +15,7 @@ vendor: src/vendor
 
 clover.xml: vendor test
 
-unit:test
+unit: test
 
 test: vendor
 	bin/phpunit --coverage-html=./reports

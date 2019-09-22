@@ -21,6 +21,15 @@ namespace Niteo\WooCart\WooDash {
 		 * Class Constructor.
 		 */
 		public function __construct() {
+			// init
+			add_action( 'admin_init', [ &$this, 'initialize' ], 10 );
+		}
+
+
+		/**
+		 * Initialize the plugin on `init` hook.
+		 */
+		public function initialize() {
 			if ( is_admin() ) {
 				// set admin url
 				$this->admin_url = esc_url( get_admin_url() );
@@ -30,7 +39,6 @@ namespace Niteo\WooCart\WooDash {
 
 				// check permissions
 				add_action( 'plugins_loaded', [ &$this, 'check_permissions' ], 10 );
-				// add_action( 'admin_init', [ &$this, 'debug_admin_menus' ], 10 );
 			}
 		}
 
