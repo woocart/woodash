@@ -1,11 +1,10 @@
 <?php
 
 
-use Niteoweb\WooCart\WooDash\WooDash;
 use Niteoweb\WooCart\WooDash\Admin;
 use PHPUnit\Framework\TestCase;
 
-class WooDashTest extends TestCase {
+class AdminTest extends TestCase {
 
 	function setUp() {
 		\WP_Mock::setUp();
@@ -21,20 +20,15 @@ class WooDashTest extends TestCase {
 
 
 	/**
-	 * @covers \Niteo\WooCart\WooDash\WooDash::__construct
 	 * @covers \Niteo\WooCart\WooDash\Admin::__construct
 	 */
 	public function testConstructor() {
-		$woodash = new WooDash();
+		$admin = new Admin();
 
-		\WP_Mock::userFunction(
-			'is_admin',
-			[
-				'return' => true,
-			]
-		);
+		\WP_Mock::expectActionAdded( 'admin_init', [ $admin, 'initialize' ], 10 );
 
-		$woodash->__construct();
+		$admin->__construct();
+		\WP_Mock::assertHooksAdded();
 	}
 
 }
