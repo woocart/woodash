@@ -69,7 +69,7 @@ psr: src/vendor
 i18n:
 	wp i18n make-pot src src/i18n/woodash.pot
 
-cover: clover.xml
+cover:
 	bin/coverage-check clover.xml 100
 
 clean:
