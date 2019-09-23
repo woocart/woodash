@@ -46,7 +46,7 @@ namespace Niteo\WooCart\WooDash {
 		/**
 		 * Attached to the activation hook.
 		 */
-		public function activate_plugin() {
+		public function activate() {
 			// add to `wp_options` table
 			update_option( Config::DB_OPTION, Config::DEFAULT_STATUS );
 
@@ -58,7 +58,7 @@ namespace Niteo\WooCart\WooDash {
 		/**
 		 * Attached to the de-activation hook.
 		 */
-		public function deactivate_plugin() {
+		public function deactivate() {
 			// remove from `wp_options` table
 			delete_option( Config::DB_OPTION );
 
@@ -81,7 +81,7 @@ namespace Niteo\WooCart\WooDash {
 		/**
 		 * Hooks for plugin activation & deactivation
 		 */
-		register_activation_hook( __FILE__, [ &$woodash, 'activate_plugin' ] );
-		register_deactivation_hook( __FILE__, [ &$woodash, 'deactivate_plugin' ] );
+		register_activation_hook( __FILE__, [ &$woodash, 'activate' ] );
+		register_deactivation_hook( __FILE__, [ &$woodash, 'deactivate' ] );
 	}
 }
