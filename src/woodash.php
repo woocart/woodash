@@ -13,15 +13,12 @@
 
 namespace Niteo\WooCart\WooDash {
 
-	// exit if called directly
-	defined( 'ABSPATH' ) || exit;
-
 	// composer autoloader
 	require_once __DIR__ . '/vendor/autoload.php';
 
 	use Niteo\WooCart\WooDash\Config;
 	use Niteo\WooCart\WooDash\Admin;
-	use Niteo\WooCart\WooDash\Dashboard;
+
 
 	/**
 	 * WooDash class where all the action happens.
@@ -40,8 +37,7 @@ namespace Niteo\WooCart\WooDash {
 		 * Class Constructor.
 		 */
 		public function __construct() {
-
-			// initialize classes
+			// initialize admin
 			$this->admin = new Admin();
 
 		}
@@ -76,14 +72,16 @@ namespace Niteo\WooCart\WooDash {
 	}
 
 
-	// initialize plugin
-	$woodash = new WooDash();
+	// stop if the request is coming directly
+	if ( defined( 'ABSPATH' ) ) {
+		// initialize plugin
+		$woodash = new WooDash();
 
 
-	/**
-	 * Hooks for plugin activation & deactivation
-	 */
-	register_activation_hook( __FILE__, [ &$woodash, 'activate_plugin' ] );
-	register_deactivation_hook( __FILE__, [ &$woodash, 'deactivate_plugin' ] );
-
+		/**
+		 * Hooks for plugin activation & deactivation
+		 */
+		register_activation_hook( __FILE__, [ &$woodash, 'activate_plugin' ] );
+		register_deactivation_hook( __FILE__, [ &$woodash, 'deactivate_plugin' ] );
+	}
 }
