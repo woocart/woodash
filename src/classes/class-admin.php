@@ -22,7 +22,7 @@ namespace Niteo\WooCart\WooDash {
 		 */
 		public function __construct() {
 			// init
-			add_action( 'admin_init', [ &$this, 'initialize' ], 10 );
+			// add_action( 'admin_init', [ &$this, 'initialize' ], 10 );
 		}
 
 
