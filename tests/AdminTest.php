@@ -331,12 +331,12 @@ class AdminTest extends TestCase {
 	/**
 	 * @covers \Niteo\WooCart\WooDash\Admin::__construct
 	 * @covers \Niteo\WooCart\WooDash\Admin::switch_dashboards
-	 * @covers \Niteo\WooCart\WooDash\Admin::reverse_dashboard_meta_order
+	 * @covers \Niteo\WooCart\WooDash\Admin::dashboard_meta_order
 	 */
 	public function testSwitchDashboardsSwitchWooDash() {
 		$mock = Mockery::mock( 'Niteo\WooCart\WooDash\Admin' )->makePartial();
 		$mock->shouldReceive( 'dashboard_meta_order' )->andReturns( true );
-		$mock->status = 'woodash';
+		$mock->status = 'regular';
 
 		$_GET['woo_dashboard'] = 'woodash';
 
