@@ -22,7 +22,7 @@ namespace Niteo\WooCart\WooDash {
 		 */
 		public function __construct() {
 			// init
-			// add_action( 'admin_init', [ &$this, 'initialize' ], 10 );
+			add_action( 'admin_init', [ &$this, 'initialize' ], 10 );
 		}
 
 
@@ -324,23 +324,6 @@ namespace Niteo\WooCart\WooDash {
 				3 => '',
 				4 => 'wp-menu-separator',
 			];
-		}
-
-
-		/**
-		 * Function to debug the admin menu.
-		 */
-		public function debug_admin_menus() {
-			global $submenu, $menu, $pagenow;
-
-			if ( 'index.php' === $pagenow ) {
-				echo '<pre>';
-				print_r( $menu );
-				echo '</pre>';
-				echo '<pre>';
-				print_r( $submenu );
-				echo '</pre>';
-			}
 		}
 
 	}
