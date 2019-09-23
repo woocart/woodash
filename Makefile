@@ -26,6 +26,7 @@ src/vendor:
 
 build: ensure
 	sed -i "s/@##VERSION##@/${VERSION}/" src/woodash.php
+	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/woodash.pot
 	mkdir -p build
 	rm -rf src/vendor
 	cd src && composer install --no-dev
@@ -35,6 +36,7 @@ build: ensure
 	rm -rf $(PLUGINSLUG)
 	mv $(PLUGINSLUG).zip build/
 	sed -i "s/${VERSION}/@##VERSION##@/" src/woodash.php
+	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/woodash.pot
 
 publish: build bin/linux/amd64/github-release
 	bin/linux/amd64/github-release upload \

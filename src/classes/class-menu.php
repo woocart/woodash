@@ -5,10 +5,11 @@ namespace Niteo\WooCart\WooDash {
 	/**
 	 * Class for menu items.
 	 *
-	 * @package    Niteo\WooCart\WooDash
-	 * @since      1.0.0
+	 * @package Niteo\WooCart\WooDash
+	 * @since   1.0.0
 	 */
 	class Menu {
+
 
 		public static $add_items;
 		public static $default_menus = [
@@ -37,7 +38,9 @@ namespace Niteo\WooCart\WooDash {
 		 */
 		public function __construct() {
 			// add items to be added to admin menu
+			// @codeCoverageIgnoreStart
 			self::$add_items = [
+				// @codeCoverageIgnoreEnd
 				'orders'    => [
 					'name'     => esc_html__( 'Orders', 'woodash' ),
 					'link'     => 'edit.php?post_type=shop_order',
@@ -69,10 +72,14 @@ namespace Niteo\WooCart\WooDash {
 					'icon'     => 'dashicons-chart-area',
 				],
 			];
+
+			return self::$add_items;
 		}
 
 	}
 
+	// @codeCoverageIgnoreStart
 	new Menu();
+	// @codeCoverageIgnoreEnd
 
 }
