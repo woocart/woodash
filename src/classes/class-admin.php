@@ -13,8 +13,8 @@ namespace Niteo\WooCart\WooDash {
 	 */
 	class Admin {
 
-		protected $admin_url;
-		protected $status;
+		public $admin_url;
+		public $status;
 
 
 		/**
@@ -97,7 +97,7 @@ namespace Niteo\WooCart\WooDash {
 							$this->reverse_dashboard_meta_order();
 						}
 
-						header( 'Location:' . $this->admin_url );
+						wp_redirect( 'Location:' . $this->admin_url );
 					}
 				}
 			}
@@ -240,6 +240,8 @@ namespace Niteo\WooCart\WooDash {
 					add_meta_box( 'dashboard_right_now', esc_html__( 'At a Glance', 'woodash' ), 'wp_dashboard_right_now', 'dashboard', 'side', 'high' );
 					add_meta_box( 'dashboard_activity', esc_html__( 'Activity', 'woodash' ), 'wp_dashboard_site_activity', 'dashboard', 'side' );
 				}
+
+				return $wp_meta_boxes;
 			}
 		}
 
@@ -324,6 +326,8 @@ namespace Niteo\WooCart\WooDash {
 				3 => '',
 				4 => 'wp-menu-separator',
 			];
+
+			return $menu;
 		}
 
 	}
