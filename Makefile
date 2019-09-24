@@ -68,10 +68,10 @@ psr: src/vendor
 	composer dump-autoload -a
 	cd src && composer dump-autoload -a
 
-i18n:
+i18n: src/vendor
 	wp i18n make-pot src src/i18n/woodash.pot
 
-cover:
+cover: vendor
 	bin/coverage-check clover.xml 100
 
 clean:
