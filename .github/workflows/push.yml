@@ -1,0 +1,28 @@
+on: push
+name: WooDash
+jobs:
+  onMasterOrPR:
+    name: On master or PR
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: On master or PR
+      uses: actions/bin/filter@master
+      with:
+        args: branch master|ref refs/pulls/*|ref refs/heads/*
+    - name: Install Dependencies
+      uses: ./.github/php
+      with:
+        args: make ensure
+    - name: Cover
+      uses: ./.github/php
+      with:
+        args: make cover
+    - name: Test
+      uses: ./.github/php
+      with:
+        args: make test
+    - name: Lint
+      uses: ./.github/php
+      with:
+        args: make fmt
