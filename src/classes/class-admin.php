@@ -146,6 +146,7 @@ namespace Niteo\WooCart\WooDash {
 			/**
 			 * We are adding two additional menu separators over here.
 			 * Adding 4 separators between values 5 and 10 (6,7,8,9)
+			 * This is required for the separators to show in the admin menu
 			 */
 			for ( $i = 35; $i < 40; $i++ ) {
 				$this->admin_menu_separator( $i );
