@@ -21,25 +21,8 @@ namespace Niteo\WooCart\WooDash {
 		 * Class Constructor.
 		 */
 		public function __construct() {
-			// init
-			add_action( 'admin_init', [ &$this, 'initialize' ], 10 );
-		}
-
-
-		/**
-		 * Initialize the plugin on `init` hook.
-		 */
-		public function initialize() {
-			if ( is_admin() ) {
-				// set admin url
-				$this->admin_url = esc_url( get_admin_url() );
-
-				// set status
-				$this->status = sanitize_text_field( get_option( Config::DB_OPTION, Config::DEFAULT_STATUS ) );
-
-				// check permissions
-				add_action( 'plugins_loaded', [ &$this, 'check_permissions' ], 10 );
-			}
+			// check permissions
+			add_action( 'wp_loaded', [ &$this, 'check_permissions' ], 10 );
 		}
 
 
@@ -47,7 +30,13 @@ namespace Niteo\WooCart\WooDash {
 		 * Check for user permissions and then proceed accordingly.
 		 */
 		public function check_permissions() {
-			if ( current_user_can( 'administrator' ) ) {
+			if ( is_admin() && current_user_can( 'administrator' ) ) {
+				// set admin url
+				$this->admin_url = esc_url( get_admin_url() );
+
+				// set status
+				$this->status = sanitize_text_field( get_option( Config::DB_OPTION, Config::DEFAULT_STATUS ) );
+
 				// initiate dashboard
 				$this->woo_dashboard();
 			}
@@ -66,7 +55,7 @@ namespace Niteo\WooCart\WooDash {
 			add_action( 'wp_dashboard_setup', [ &$this, 'dashboard_widgets' ], PHP_INT_MAX );
 
 			// switch dashboards
-			add_action( 'init', [ &$this, 'switch_dashboards' ], 10 );
+			add_action( 'admin_init', [ &$this, 'switch_dashboards' ], 10 );
 
 			// filters
 			// re-arrange admin menu
@@ -97,7 +86,7 @@ namespace Niteo\WooCart\WooDash {
 							$this->reverse_dashboard_meta_order();
 						}
 
-						wp_redirect( 'Location:' . $this->admin_url );
+						wp_redirect( $this->admin_url );
 					}
 				}
 			}
