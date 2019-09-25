@@ -1,17 +1,54 @@
-=== Woo Simple Dashboard ===
-Contributors: Niteo, WooCart
-Tags: woocart, woocommerce, woo dashboard
-Requires at least: 4.0
-Tested up to: 4.9.7
+=== WooDash ===
+Contributors: woocart
+Tags: woocart, woocommerce, woodash, woo dashboard
+Requires at least: 4.6
+Tested up to: 5.2.3
 Stable tag: 1.0.0
+Requires PHP: 5.6
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-**Woo Simple Dashboard** is a plugin for WooCommerce stores that creates a store-focused dashboard and menu to make it easier to access the common store features.
+Simple Dashboard for WooCommerce
 
 == Description ==
-**Woo Simple Dashboard** is a plugin for WooCommerce stores that creates a store-focused dashboard and menu to make it easier to access the common store features. It includes a menu link to switch between the regular WordPress dashboard and the Woo Simple Dashboard.
+
+WooDash creates a store-focused sidebar menu and home dashboard for easier access to the common WooCommerce features.
+
+Instead of the unending sidebar menu of different plugin options, WooDash shows only the relevant buttons for a WooCommerce store.
+
+- My Store
+- Orders
+- Stock
+- Customers
+- Products
+- Taxes
+- Reports
+- Posts
+- Pages
+- Media
+- Users
+
+You can switch to the regular dashboard by clicking Switch Dashboard in the sidebar menu.
+
+WooDash makes onboarding new clients to WooCommerce a lot easier and simplifies the store administration for the store managers.
 
 == Installation ==
 
-1. Upload 'woo-simple-dashboard' directory to the '/wp-content/plugins/' directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. That's it! You can start switching between two versions of the Dashboard
+1. Upload the entire woodash folder to the /wp-content/plugins/ directory.
+2. Activate the plugin through the ‘Plugins’ menu in WordPress.
+
+Switch to regular dashboard by clicking Switch Dashboard in the sidebar menu.
+
+https://github.com/woocart/woodash
+
+== Frequently Asked Questions ==
+
+
+== Screenshots ==
+
+
+== Changelog ==
+
+
+== Upgrade Notice ==
+
