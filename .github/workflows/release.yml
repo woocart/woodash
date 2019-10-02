@@ -10,6 +10,6 @@ jobs:
     - name: Create ZIP
       run: make build
     - name: Upload to Release
-      args: "build/woodash.zip application/zip"
+      args: build/woodash.zip application/zip
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
