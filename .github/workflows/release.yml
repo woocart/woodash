@@ -13,4 +13,3 @@ jobs:
       args: "build/woodash.zip application/zip"
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-
