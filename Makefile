@@ -25,18 +25,18 @@ src/vendor:
 	cd src && composer dump-autoload -a
 
 build: ensure
-	sed -i "s/@##VERSION##@/${VERSION}/" src/woodash.php
-	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/woodash.pot
+	sed -i "" "s|@##VERSION##@|${VERSION}|g" src/woodash.php
+	sed -i "" "s|@##VERSION##@|${VERSION}|g" src/i18n/woodash.pot
 	mkdir -p build
 	rm -rf src/vendor
 	cd src && composer install --no-dev
 	cd src && composer dump-autoload -a
-	cp -ar $(SRCPATH) $(PLUGINSLUG)
+	cp -R $(SRCPATH) $(PLUGINSLUG)
 	zip -r $(PLUGINSLUG).zip $(PLUGINSLUG)
 	rm -rf $(PLUGINSLUG)
 	mv $(PLUGINSLUG).zip build/
-	sed -i "s/${VERSION}/@##VERSION##@/" src/woodash.php
-	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/woodash.pot
+	sed -i "" "s|${VERSION}|@##VERSION##@|g" src/woodash.php
+	sed -i "" "s|${VERSION}|@##VERSION##@|g" src/i18n/woodash.pot
 
 publish: build bin/linux/amd64/github-release
 	bin/linux/amd64/github-release upload \

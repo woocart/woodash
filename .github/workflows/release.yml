@@ -1,0 +1,16 @@
+on: release
+name: Package
+
+jobs:
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    steps:
+    - uses: JasonEtco/upload-to-release@master
+    - name: Create ZIP
+      run: make build
+    - name: Upload to Release
+      args: "build/woodash.zip application/zip"
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+

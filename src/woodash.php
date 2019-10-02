@@ -25,7 +25,7 @@ namespace Niteo\WooCart\WooDash {
 	 *
 	 * @category   Plugins
 	 * @package    Niteo\WooCart\WooDash
-	 * @since      1.0.0
+	 * @since      @##VERSION##@
 	 */
 	class WooDash {
 
