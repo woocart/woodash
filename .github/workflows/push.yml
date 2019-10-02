@@ -16,3 +16,18 @@ jobs:
     - name: Cover
       run: make cover
 
+  deploy:
+    name: Deploy to WP.org
+    steps:
+      - uses: actions/bin/filter@master"
+      - name: New Tag
+        args: tag
+      - uses: ./.github/deploy
+        env:
+          SLUG: spiderblocker
+        with:
+          username: ${{ secrets.SVN_USERNAME }}
+          password: ${{ secrets.SVN_PASSWORD }}
+
+
+
