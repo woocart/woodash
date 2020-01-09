@@ -212,6 +212,7 @@ class AdminTest extends TestCase {
 				'separator36',
 				'admin.php?page=wc-reports&tab=taxes',
 				'admin.php?page=wc-reports',
+				'wc-admin&path=/analytics/revenue',
 				'separator37',
 				'edit.php',
 				'edit.php?post_type=page',
