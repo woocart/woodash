@@ -201,6 +201,7 @@ namespace Niteo\WooCart\WooDash {
 					'separator36',
 					$this->admin_url . 'admin.php?page=wc-reports&tab=taxes',
 					$this->admin_url . 'admin.php?page=wc-reports',
+					'wc-admin&path=/analytics/revenue',
 					'separator37',
 					'edit.php',
 					'edit.php?post_type=page',

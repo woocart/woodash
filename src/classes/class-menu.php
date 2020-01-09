@@ -30,6 +30,9 @@ namespace Niteo\WooCart\WooDash {
 
 			// users
 			'users.php',
+
+			// WC Admin
+			'wc-admin&path=/analytics/revenue',
 		];
 
 
