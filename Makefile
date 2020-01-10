@@ -38,6 +38,17 @@ build: ensure
 	sed -i "s/${VERSION}/@##VERSION##@/" src/woodash.php
 	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/woodash.pot
 
+dist: ensure
+	sed -i "s/@##VERSION##@/${VERSION}/" src/woodash.php
+	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/woodash.pot
+	mkdir -p dist
+	rm -rf src/vendor
+	cd src && composer install --no-dev
+	cd src && composer dump-autoload -a
+	cp -r $(SRCPATH)/. dist/
+	sed -i "s/${VERSION}/@##VERSION##@/" src/woodash.php
+	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/woodash.pot
+
 publish: build bin/linux/amd64/github-release
 	bin/linux/amd64/github-release upload \
 		--user woocart \
