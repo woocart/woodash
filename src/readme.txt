@@ -48,7 +48,8 @@ https://github.com/woocart/woodash
 
 
 == Changelog ==
-
+=== v1.1.0 ===
+- Fixed conflict with WooCommerce Admin plugin
 
 == Upgrade Notice ==
 
