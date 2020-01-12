@@ -3,7 +3,7 @@ Contributors: woocart
 Tags: woocart, woocommerce, woodash, woo dashboard
 Requires at least: 4.6
 Tested up to: 5.3.2
-Stable tag: 1.1.4
+Stable tag: 1.2.0
 Requires PHP: 5.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -48,6 +48,10 @@ https://github.com/woocart/woodash
 
 
 == Changelog ==
+= v1.2.0 =
+- Shows admin notice on plugin activation
+- Taxes in the admin menu are hidden if the option is not enabled in WooCommerce
+
 = v1.1.3 =
 - Fixed conflict with WooCommerce Admin plugin
 
