@@ -62,12 +62,6 @@ namespace Niteo\WooCart\WooDash {
 					'priority' => 103,
 					'icon'     => 'dashicons-groups',
 				],
-				'taxes'     => [
-					'name'     => esc_html__( 'Taxes', 'woodash' ),
-					'link'     => 'admin.php?page=wc-reports&tab=taxes',
-					'priority' => 104,
-					'icon'     => 'dashicons-feedback',
-				],
 				'reports'   => [
 					'name'     => esc_html__( 'All Reports', 'woodash' ),
 					'link'     => 'admin.php?page=wc-reports',

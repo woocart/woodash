@@ -126,6 +126,16 @@ namespace Niteo\WooCart\WooDash {
 					}
 				}
 
+				// Check if taxes are enabled in WooCommerce
+				if ( 'yes' === get_option( 'woocommerce_calc_taxes', 'no' ) ) {
+					Menu::$add_items['taxes'] = [
+						'name'     => esc_html__( 'Taxes', 'woodash' ),
+						'link'     => 'admin.php?page=wc-reports&tab=taxes',
+						'priority' => 104,
+						'icon'     => 'dashicons-feedback',
+					];
+				}
+
 				// Add menu items.
 				foreach ( Menu::$add_items as $menu_key => $menu_value ) {
 					add_menu_page(

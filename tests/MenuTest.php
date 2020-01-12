@@ -46,12 +46,6 @@ class MenuTest extends TestCase {
 					'priority' => 103,
 					'icon'     => 'dashicons-groups',
 				],
-				'taxes'     => [
-					'name'     => 'Taxes',
-					'link'     => 'admin.php?page=wc-reports&tab=taxes',
-					'priority' => 104,
-					'icon'     => 'dashicons-feedback',
-				],
 				'reports'   => [
 					'name'     => 'All Reports',
 					'link'     => 'admin.php?page=wc-reports',
