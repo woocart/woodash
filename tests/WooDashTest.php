@@ -62,6 +62,19 @@ class WooDashTest extends TestCase {
 		);
 
 		\WP_Mock::userFunction(
+			'set_transient',
+			[
+				'called' => 1,
+				'args'   => [
+					'woodash_plugin-activation-notice',
+					true,
+					60 * 60 * 24,
+				],
+				'return' => true,
+			]
+		);
+
+		\WP_Mock::userFunction(
 			'maybe_serialize',
 			[
 				'called' => 1,
