@@ -433,70 +433,6 @@ class AdminTest extends TestCase {
 		];
 
 		\WP_Mock::userFunction(
-			'remove_menu_page',
-			[
-				'called' => 2,
-				'return' => true,
-			]
-		);
-
-		\WP_Mock::userFunction(
-			'add_menu_page',
-			[
-				'return' => true,
-			]
-		);
-
-		\WP_Mock::userFunction(
-			'sanitize_text_field',
-			[
-				'return' => true,
-			]
-		);
-
-		\WP_Mock::userFunction(
-			'absint',
-			[
-				'return' => true,
-			]
-		);
-
-		$mock->change_admin_menu();
-	}
-
-	/**
-	 * @covers \Niteo\WooCart\WooDash\Admin::__construct
-	 * @covers \Niteo\WooCart\WooDash\Admin::change_admin_menu
-	 */
-	public function testChangeAdminMenuStatusWooDashTaxesOn() {
-		global $menu;
-
-		$mock = Mockery::mock( 'Niteo\WooCart\WooDash\Admin' )->makePartial();
-		$mock->shouldReceive( 'admin_menu_separator' )->andReturns( true );
-		$mock->status = 'woodash';
-
-		$GLOBALS['menu'] = [
-			'page1' => [
-				1,
-				'page1',
-				'page1.php',
-			],
-			'page2' => [
-				2,
-				'page2',
-				'page2.php',
-			],
-		];
-
-		\WP_Mock::userFunction(
-			'remove_menu_page',
-			[
-				'called' => 2,
-				'return' => true,
-			]
-		);
-
-		\WP_Mock::userFunction(
 			'get_option',
 			[
 				'called' => 1,
@@ -505,6 +441,14 @@ class AdminTest extends TestCase {
 					'no',
 				],
 				'return' => 'yes',
+			]
+		);
+
+		\WP_Mock::userFunction(
+			'remove_menu_page',
+			[
+				'called' => 2,
+				'return' => true,
 			]
 		);
 
