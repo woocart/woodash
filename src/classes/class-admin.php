@@ -22,7 +22,8 @@ namespace Niteo\WooCart\WooDash {
 		 */
 		public function __construct() {
 			// check permissions
-			add_action( 'wp_loaded', [ &$this, 'check_permissions' ], 10 );
+			add_action( 'wp_loaded', [ $this, 'check_permissions' ], 10 );
+			add_action( 'admin_notices', [ $this, 'activate_plugin_notice' ] );
 		}
 
 
@@ -49,18 +50,18 @@ namespace Niteo\WooCart\WooDash {
 		public function woo_dashboard() {
 			// actions
 			// hide menu items
-			add_action( 'admin_menu', [ &$this, 'change_admin_menu' ], PHP_INT_MAX );
+			add_action( 'admin_menu', [ $this, 'change_admin_menu' ], PHP_INT_MAX );
 
 			// dashboard widgets setup
-			add_action( 'wp_dashboard_setup', [ &$this, 'dashboard_widgets' ], PHP_INT_MAX );
+			add_action( 'wp_dashboard_setup', [ $this, 'dashboard_widgets' ], PHP_INT_MAX );
 
 			// switch dashboards
-			add_action( 'admin_init', [ &$this, 'switch_dashboards' ], 10 );
+			add_action( 'admin_init', [ $this, 'switch_dashboards' ], 10 );
 
 			// filters
 			// re-arrange admin menu
-			add_filter( 'custom_menu_order', [ &$this, 'rearrange_admin_menu' ], PHP_INT_MAX, 1 );
-			add_filter( 'menu_order', [ &$this, 'rearrange_admin_menu' ], PHP_INT_MAX, 1 );
+			add_filter( 'custom_menu_order', [ $this, 'rearrange_admin_menu' ], PHP_INT_MAX, 1 );
+			add_filter( 'menu_order', [ $this, 'rearrange_admin_menu' ], PHP_INT_MAX, 1 );
 		}
 
 
@@ -99,11 +100,15 @@ namespace Niteo\WooCart\WooDash {
 		 * @codeCoverageIgnore
 		 */
 		public function activate_plugin_notice() {
-			?>
-			<div class="notice notice-success">
-				<p><?php esc_html_e( 'WooDash plugin has been activated and provides an easy switcher for two different Dashboards.', 'woodash' ); ?></p>
-			</div>
-			<?php
+			if ( get_transient( Config::PREFIX . 'plugin-activation-notice' ) ) {
+				?>
+				<div class="notice notice-success is-dismissible">
+					<p><?php esc_html_e( 'WooDash plugin has been activated and provides an easy switcher for two different Dashboards.', 'woodash' ); ?></p>
+				</div>
+				<?php
+
+				delete_transient( Config::PREFIX . 'plugin-activation-notice' );
+			}
 		}
 
 

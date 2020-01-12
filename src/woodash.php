@@ -50,6 +50,9 @@ namespace Niteo\WooCart\WooDash {
 			// add to `wp_options` table
 			update_option( Config::DB_OPTION, Config::DEFAULT_STATUS );
 
+			// Add plugin activation notice
+			set_transient( Config::PREFIX . 'plugin-activation-notice', true, 60 * 60 * 24 );
+
 			// update usermeta table for dashboard widgets
 			$this->admin->dashboard_meta_order();
 		}
@@ -81,7 +84,7 @@ namespace Niteo\WooCart\WooDash {
 		/**
 		 * Hooks for plugin activation & deactivation
 		 */
-		register_activation_hook( __FILE__, [ &$woodash, 'activate' ] );
-		register_deactivation_hook( __FILE__, [ &$woodash, 'deactivate' ] );
+		register_activation_hook( __FILE__, [ $woodash, 'activate' ] );
+		register_deactivation_hook( __FILE__, [ $woodash, 'deactivate' ] );
 	}
 }
