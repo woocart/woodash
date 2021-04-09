@@ -4,87 +4,84 @@
  * Plugin Name: WooDash
  * Description: WooDash creates a store-focused sidebar menu and home dashboard to make it easier to access the common WooCommerce features.
  * Version:     @##VERSION##@
- * Runtime:     5.6+
+ * Runtime:     7.3+
  * Author:      WooCart
  * Text Domain: woodash
  * Domain Path: i18n
  * Author URI:  www.woocart.com
  */
 
-namespace Niteo\WooCart\WooDash {
+namespace Niteo\WooCart\WooDash;
 
-	// composer autoloader
-	require_once __DIR__ . '/vendor/autoload.php';
+// Stop execution if the file is called directly.
+defined( 'ABSPATH' ) || exit;
 
-	use Niteo\WooCart\WooDash\Config;
-	use Niteo\WooCart\WooDash\Admin;
+// Composer autoloder file.
+require_once __DIR__ . '/vendor/autoload.php';
 
+/**
+ * Plugin class where all the action happens.
+ *
+ * @category   Plugins
+ * @package    Niteo\WooCart\WooDash
+ */
+class WooDash {
 
 	/**
-	 * WooDash class where all the action happens.
-	 *
-	 * @category   Plugins
-	 * @package    Niteo\WooCart\WooDash
-	 * @since      1.0.0
+	 * @var stdClass
 	 */
-	class WooDash {
+	protected $admin;
 
-		protected $admin;
-		protected $dashboard;
-
-
-		/**
-		 * Class Constructor.
-		 */
-		public function __construct() {
-			// initialize admin
-			$this->admin = new Admin();
-
+	/**
+	 * Class Constructor.
+	 */
+	public function __construct() {
+		// WooCommerce version check.
+		if ( ! WooCheck::is_plugin_active( 'woocommerce.php' ) ) {
+			add_action( 'admin_notices', array( 'Niteo\WooCart\WooDash\WooCheck', 'inactive_notice' ) );
+			return;
 		}
 
-
-		/**
-		 * Attached to the activation hook.
-		 */
-		public function activate() {
-			// add to `wp_options` table
-			update_option( Config::DB_OPTION, Config::DEFAULT_STATUS );
-
-			// Add plugin activation notice
-			set_transient( Config::PREFIX . 'plugin-activation-notice', true, 60 * 60 * 24 );
-
-			// update usermeta table for dashboard widgets
-			$this->admin->dashboard_meta_order();
-		}
-
-
-		/**
-		 * Attached to the de-activation hook.
-		 */
-		public function deactivate() {
-			// remove from `wp_options` table
-			delete_option( Config::DB_OPTION );
-
-			// reverse usermeta table for dashboard widgets
-			$this->admin->reverse_dashboard_meta_order();
-
-			// also, remove the usermeta backup
-			$this->admin->remove_meta_backup();
-		}
-
+		$this->admin = new Admin();
 	}
 
+	/**
+	 * Attached to the activation hook.
+	 *
+	 * @return void
+	 */
+	public function activate() : void {
+		// Add to `wp_options` table.
+		update_option( Config::DB_OPTION, Config::DEFAULT_STATUS );
 
-	// stop if the request is coming directly
-	if ( defined( 'ABSPATH' ) ) {
-		// initialize plugin
-		$woodash = new WooDash();
+		// Add plugin activation notice.
+		set_transient( Config::PREFIX . 'plugin-activation-notice', true, 60 * 60 * 24 );
 
-
-		/**
-		 * Hooks for plugin activation & deactivation
-		 */
-		register_activation_hook( __FILE__, [ $woodash, 'activate' ] );
-		register_deactivation_hook( __FILE__, [ $woodash, 'deactivate' ] );
+		// Update usermeta table for dashboard widgets.
+		$this->admin->dashboard_meta_order();
 	}
+
+	/**
+	 * Attached to the de-activation hook.
+	 *
+	 * @return void
+	 */
+	public function deactivate() : void {
+		// Remove options.
+		delete_option( Config::DB_OPTION );
+
+		// Reverse user meta for dashboard widgets.
+		$this->admin->reverse_dashboard_meta_order();
+
+		// Remove the user meta backup.
+		$this->admin->remove_meta_backup();
+	}
+
 }
+
+// Initialize plugin.
+$woodash = new WooDash();
+
+// Hooks for plugin activation & deactivation.
+register_activation_hook( __FILE__, array( $woodash, 'activate' ) );
+register_deactivation_hook( __FILE__, array( $woodash, 'deactivate' ) );

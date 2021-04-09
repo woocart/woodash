@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.3/phpunit.xsd"
          bootstrap="tests/autoload.php"
          forceCoversAnnotation="true"
-         beStrictAboutCoversAnnotation="true"
+         beStrictAboutCoversAnnotation="false"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
          verbose="true">
@@ -13,16 +13,21 @@
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/classes</directory>
-        </whitelist>
-    </filter>
+    <coverage includeUncoveredFiles="true"
+              processUncoveredFiles="true"
+              ignoreDeprecatedCodeUnits="true"
+              disableCodeCoverageIgnore="false">
+        <include>
+            <directory suffix=".php">src/inc</directory>
+        </include>
+
+        <report>
+            <clover outputFile="clover.xml" />
+        </report>
+    </coverage>
+
     <php>
         <ini name="display_errors" value="On" />
         <ini name="display_startup_errors" value="On" />
     </php>
-    <logging>
-        <log type="coverage-clover" target="clover.xml"/>
-    </logging>
 </phpunit>
